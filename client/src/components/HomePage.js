@@ -12,7 +12,13 @@ function HomePage() {
   },[])
   // console.log(movies);
   return (
-    <Box width={"100%"} height={"100%"} margin="auto" marginTop={2}>
+    <Box
+      sx={{ bgcolor: "smokewhite" }}
+      width={"100%"}
+      height={"100%"}
+      margin="auto"
+      marginTop={2}
+    >
       <Box margin={"auto"} width={"80%"} height={"40vh"} padding={2}>
         <img
           src="https://c4.wallpaperflare.com/wallpaper/716/768/969/anime-naruto-itachi-uchiha-sasuke-uchiha-wallpaper-preview.jpg"
@@ -27,12 +33,24 @@ function HomePage() {
         </Typography>
       </Box>
       <Box
+        margin={"auto"}
         display={"flex"}
         width={"80%"}
         justifyContent={"center"}
         flexWrap={"wrap"}
       >
-        {movies && movies.slice(0,4).map((movie, index) => <MovieItem id={movies.id} title={movie.title} posterUrl={movie.posterUrl} releaseDate={movie.releaseDate} key={index} />)}
+        {movies &&
+          movies
+            .slice(0, 4)
+            .map((movie, index) => (
+              <MovieItem
+                id={movie._id}
+                title={movie.title}
+                posterUrl={movie.posterUrl}
+                releaseDate={movie.releaseDate}
+                key={index}
+              />
+            ))}
       </Box>
       <Box display={"flex"} padding={5} margin="auto">
         <Button

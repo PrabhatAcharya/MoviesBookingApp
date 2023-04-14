@@ -45,17 +45,23 @@ function Booking() {
               display={"flex"}
               justifyContent={"column"}
               flexDirection="column"
-              paddingTop={3}
-              width="50%"
-              marginRight={"auto"}
+              width="40%"
+              marginRight={"1rem"}
+              marginLeft={"1rem"}
+              boxShadow={3}
+              padding={"1rem"}
+             
             >
               <img
                 src={movie.posterUrl}
                 alt={movie.title}
                 width={"60%"}
                 height={"300px"}
+                marginLeft="5%"
+                
+                
               />
-              <Box width={"80%"} marginTop={3} padding={2}>
+              <Box width={"80%"}  marginTop={3} >
                 <Typography paddingTop={2}>{movie.description}</Typography>
                 <Typography fontStyle={"bold"} marginTop={1}>
                   Actors & Actress : {movie.actors.map((actor) => actor + " ,")}
@@ -65,7 +71,7 @@ function Booking() {
                 </Typography>
               </Box>
             </Box>
-            <Box width={"50%"} paddingTop={3}>
+            <Box width={"40%"} paddingTop={3} boxShadow={3}>
               <form onSubmit={handleSubmit}>
                 <Box
                   padding={5}
@@ -91,7 +97,7 @@ function Booking() {
                     margin="normal"
                     onChange={handleChange}
                   />
-                  <Button type="submit" sx={{ mt: 3 }}>
+                  <Button type="submit" variant='contained' sx={{ mt: 3 }}>
                     Book Now
                   </Button>
                 </Box>
