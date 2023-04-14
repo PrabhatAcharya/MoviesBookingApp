@@ -51,7 +51,8 @@ export const addMovie=async(req, res, next)=>{
         if(!movie){
             return res.status(500).json({message:"Request failed"});
         }
-        return res.status(200).json({movie});
+        // return res.status(200).json({ movie, adminUser });
+                return res.status(200).json({ movie});
 
     }
 export const getAllMovies=async(req, res)=>{

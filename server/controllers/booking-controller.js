@@ -37,20 +37,22 @@ export const newBooking=async(req,res)=>{
     if(!booking) {
         return request.status(500).json({message:"Unable to create"})
     }
-    return res.status(200).json({booking});
+    return res.status(200).json({ booking, existingMovie, existingUser });
 } 
 export const getBookingById = async (req, res) => {
     const id=req.params.id;
     let booking;
+    let user;
     try {
         booking=await Bookings.findById(id);
+         user = await User.findById(id);
     } catch (error) {
         return console.error(error);
     }
     if(!booking){
         return res.status(500).json({message:"Unexpected error"});
     }
-    return res.status(200).json({booking});
+    return res.status(200).json({ booking, user });
 }
 export const delteBooking = async(req, res) =>{
     const id=req.params.id;

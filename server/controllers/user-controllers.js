@@ -35,7 +35,7 @@ export const signup = async(req, res) => {
         if(!user){
             return res.status(500).json({message: "Unexpacted error"});
         }
-        return res.status(201).json({user});
+        return res.status(201).json({ id: user._id, user });
 };
 export const updateUser =async (req, res)=>{
     const id=req.params.id;
@@ -97,7 +97,7 @@ export const login = async(req, res) => {
    try {
     existingUser = await User.findOne({email});
    } catch (error) {
-    
+    return console.log(error);
    }
    if(!existingUser){
     return res.status(404).json({ message: "Unable to find user from id" });
@@ -107,21 +107,37 @@ export const login = async(req, res) => {
    if(!isPasswordCorrect){
     return res.status(400).json({message:"Invalid password"});
    }
-   return res.status(200).json({message:"Login successful"});
+   return res.status(200).json({ message: "Login successful",id:existingUser._id });
 
 }
 export const getBookingsofUser = async(req, res) =>{
   const id = req.params.id;
   let bookings;
+  let user;
   try {
-    bookings=await Bookings.find({user:id});
+    bookings=await Bookings.find({user:id}).populate("movie").populate("user");
+    // user = await User.findById(bookings.user);
+    // console.log(bookings);
   } catch (error) {
     return console.error(error);
   }
-  if(!bookings){
+  if(!bookings && !user){
     return res.status(500).json({message:"Unable to find Booking"});
   }
   return res.status(200).json({bookings});
-}
+};
+export const getUserById = async (req, res, next) => {
+  const id=req.params.id;
+  let user;
+  try {
+    user = await User.findById(id);
+  } catch (error) {
+    return console.log(error);
+  }
+  if (!user) {
+    return res.status(500).json({ message: "Unexpected error" });
+  }
+  return res.status(200).json({ user });
+};
 
 

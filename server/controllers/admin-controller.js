@@ -70,4 +70,17 @@ export const getAdmins=async(req, res, next) => {
     return res.status(500).json({message: "Internal Server Error"});
   }
   return res.status(200).json({admins});
-}
+};
+export const getAdminById = async (req, res, next) => {
+  const id=req.params.id;
+  let admin;
+  try {
+    admin = await Admin.findById(id).populate("addedMovies");
+  } catch (err) {
+    return console.error(err);
+  }
+  if (!admin) {
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+  return res.status(200).json({ admin });
+};
